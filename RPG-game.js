@@ -57,4 +57,9 @@ class tovenaar extends personage {
 
 Arthur = krijger("Arthur", 100, "Excalibur");
 Merlijn = tovenaar("Merlijn", 70, 25);
-Merlijn.spreekSprukUit(Arthur);
+
+for (let i; i < 2; i++) {
+  Merlijn.spreekSprukUit(Arthur);
+}
+
+arthur.valAan();
