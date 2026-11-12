@@ -1,27 +1,43 @@
+_levenspunten = symbol();
+
 class personage {
   constructor(naam, levenspunten) {
     this.naam = naam;
-    this.levenspunten = levenspunten;
+    this[_levenspunten] = levenspunten;
     this.niveau = 1;
   }
 
   toonStatus() {
-    return `naam (${this.naam}) - HP (${this.levenspunten})`;
+    return `naam (${this.naam}) - HP (${this[levenspunten]})`;
   }
 
   ontvangSchade(aantal) {
-    if (this.levenspunten - aantal < 0) {
-      this.levenspunten = 0;
+    if (this[levenspunten] - aantal < 0) {
+      this[levenspunten] = 0;
     } else {
-      this.levenspunten -= aantal;
+      this[levenspunten] -= aantal;
     }
 
-    console.log(this.levenspunten);
+    console.log(this[levenspunten]);
   }
 
   levelUp() {
+    //levelUp
     this.niveau += 1;
-    this.levenspunten += 20;
+    this[levenspunten] += 20;
+  }
+
+  getLevenspunten() {
+    //getter
+    return this[levenspunten];
+  }
+
+  setLevenspunten(value) {
+    if (value >= 0) {
+      this[levenspunten] = value;
+    } else {
+      console.log("kan niet de levenspunten negatief maken!");
+    }
   }
 }
 
@@ -38,7 +54,7 @@ class krijger extends personage {
   }
 
   levelUp() {
-    this.levenspunten += 10;
+    this[levenspunten] += 10;
   }
 }
 
@@ -58,8 +74,9 @@ class tovenaar extends personage {
 Arthur = krijger("Arthur", 100, "Excalibur");
 Merlijn = tovenaar("Merlijn", 70, 25);
 
-for (let i; i < 2; i++) {
-  Merlijn.spreekSprukUit(Arthur);
-}
-
-arthur.valAan();
+Merlijn.spreekSprukUit(Arthur);
+Merlijn.spreekSprukUit(Arthur);
+Arthur.valAan(Merlijn);
+Arthur.levelUP();
+Merlijn.spreekSprukUit(Arthur);
+console.log(Arthur.toonStatus(), Arthur.toonStatus());
